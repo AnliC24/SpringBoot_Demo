@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.TeacherDAO">
+      <sql id="addStu">stu_name,stu_sex,stu_stuid</sql>
+      <!-- 教师登录 -->
+      <select id="getTeacherInfoByLogin" resultType="Teacher">
+         select * from tb_teacher where tea_name=#{name} and tea_id=#{id}
+      </select>
+      <!-- 查询学生信息 By name -->
+      <select id="queryStudentInfoByName" resultType="Student">
+         select * from tb_student where stu_name=#{name} 
+      </select>
+      <!-- 添加学生信息 -->
+      <insert id="addStudentInfo" parameterType="Student" useGeneratedKeys="true"  flushCache="true">
+         insert into tb_student(<include refid="addStu"></include>) values(#{stu_name},#{stu_sex},#{stu_stuid})
+      </insert>
+      <!-- 修改学生信息 -->
+      <update id="updateStudentStuIdByName">
+         update tb_student set stu_stuid=#{stuid} where stu_name=#{name}
+      </update>
+      <!-- 删除学生信息 -->
+     <delete id="deleteStudentInfoById">
+        delete from tb_student where stu_stuid=#{id}
+     </delete>
+</mapper>
