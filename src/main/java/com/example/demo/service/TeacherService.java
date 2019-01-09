@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dao.TeacherDAO;
 import com.example.demo.pojo.Student;
+import com.example.demo.pojo.StudentVue;
 import com.example.demo.pojo.Teacher;
 import com.example.demo.serviceimpl.TeacherServiceImpl;
 
@@ -34,7 +35,7 @@ public class TeacherService implements TeacherServiceImpl{
     
 	@Transactional
 	@Override
-	public boolean addStudentInfo(Student stu) {
+	public boolean addStudentInfo(StudentVue stu) {
 		// TODO Auto-generated method stub
 		return teaDAO.addStudentInfo(stu);
 	}

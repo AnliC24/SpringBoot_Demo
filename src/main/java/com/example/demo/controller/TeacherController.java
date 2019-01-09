@@ -6,10 +6,15 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.pojo.Student;
+import com.example.demo.pojo.StudentVue;
 import com.example.demo.pojo.Teacher;
 import com.example.demo.service.TeacherService;
 
@@ -21,46 +26,53 @@ public class TeacherController extends BaseController{
 	@Resource
 	private TeacherService teacherService;
 	
-	@RequestMapping("/login")
-	public Object getTeacherInfo()
+	@RequestMapping(path="/login",method=RequestMethod.POST)
+	public Object getTeacherInfo(@RequestParam String name,@RequestParam String id)
 	{   
 		Map<String, Object> teaMap=new HashMap<>();
-		teaMap.put("name", "root");
-		teaMap.put("id", 1);
+		teaMap.put("name", name);
+		teaMap.put("id", id);
 		Teacher teacher=teacherService.getTeacherInfoByLogin(teaMap);
 		return teacher;
 	}
 	
-	@RequestMapping("/query")
-	public Object getStudentInfo()
+	@RequestMapping(path="/query",method=RequestMethod.POST)
+	public Object getStudentInfo(@RequestParam String name)
 	{
-		String name="root";
+		//String name="root";
 		Student student=teacherService.queryStudentInfoByName(name);
 		return student;
 	}
 	
-	@RequestMapping("/add")
-	public void addStudentInfo()
-	{
-		Student student=new Student("张三", "男", "245121");
-		boolean flag=teacherService.addStudentInfo(student);
+	@RequestMapping(path="/add",method=RequestMethod.POST)
+	public boolean addStudentInfo(StudentVue stu)
+	{   
+		//@RequestBody StudentVue stu
+		//@RequestParam String name,@RequestParam String id,@RequestParam String sex
+		//@RequestParam String stu_name,@RequestParam String stu_stuid,@RequestParam String stu_sex
+		//Student student=new Student(stu_name, stu_sex, stu_stuid);
+		//StudentVue stu=new StudentVue(stu_name, stu_sex, stu_stuid);
+		boolean flag=teacherService.addStudentInfo(stu);
 		logger.info("是否添加成功:"+flag);
+		return flag;
 	}
 	
-	@RequestMapping("/update")
-	public void updateStudentInfo()
+	@RequestMapping(path="/update",method=RequestMethod.PUT)
+	public boolean updateStudentInfo(@RequestParam String name,@RequestParam String id)
 	{
 		Map<String, Object> stuMap=new HashMap<>();
-		stuMap.put("name", "root");
-		stuMap.put("stuid", "11111");
+		stuMap.put("name", name);
+		stuMap.put("stuid", id);
 		boolean flag=teacherService.updateStudentInfoByName(stuMap);
 		logger.info("是否更新成功:"+flag);
+		return flag;
 	}
-	@RequestMapping("/delete")
-	public void deleteStudentInfo()
+	@RequestMapping(path="/delete",method=RequestMethod.DELETE)
+	public boolean deleteStudentInfo(@RequestParam String name,@RequestParam String id)
 	{
-		String id="123456";
+		//String id="123456";
 		boolean flag=teacherService.deleteStudentInfoById(id);
 		logger.info("是否删除成功:"+flag);
+		return flag;
 	}
 }

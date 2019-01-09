@@ -2,33 +2,20 @@ package com.example.demo.pojo;
 
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-public class Student implements Serializable{
-    private Integer stu_id;
-    private String stu_name;
+public class StudentVue implements Serializable{
+	private String stu_name;
     private String stu_sex;
     private String stu_stuid;
     
-  
-	public Student(Integer stu_id, String stu_name, String stu_sex, String stu_stuid) {
+
+	public StudentVue() {
 		super();
-		this.stu_id = stu_id;
-		this.stu_name = stu_name;
-		this.stu_sex = stu_sex;
-		this.stu_stuid = stu_stuid;
 	}
-	public Student(String stu_name, String stu_sex, String stu_stuid) {
+	public StudentVue(String stu_name, String stu_sex, String stu_stuid) {
 		super();
 		this.stu_name = stu_name;
 		this.stu_sex = stu_sex;
 		this.stu_stuid = stu_stuid;
-	}
-	public Integer getStu_id() {
-		return stu_id;
-	}
-	public void setStu_id(Integer stu_id) {
-		this.stu_id = stu_id;
 	}
 	public String getStu_name() {
 		return stu_name;
@@ -50,5 +37,4 @@ public class Student implements Serializable{
 	}
     
     
-	
 }
