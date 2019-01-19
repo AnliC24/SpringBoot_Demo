@@ -1,18 +1,16 @@
 package com.example.demo.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
+import com.example.demo.pojo.Student;
+import com.example.demo.service.StudentService;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.pojo.Student;
-import com.example.demo.service.StudentService;
+import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 @ComponentScan({"com.example.demo.service.StudentService"})
 @RestController
@@ -20,7 +18,7 @@ import com.example.demo.service.StudentService;
 public class StudentController extends BaseController{
 	@Resource
     private StudentService stuService;
-	@RequestMapping(path="/login")
+	@PostMapping(path="/login")
 	public Object getStudentInfo(@RequestParam String name,@RequestParam String id)
 	{   
 		Map<String, Object> stuMap=new HashMap<>();
